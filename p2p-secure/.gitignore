@@ -1,0 +1,14 @@
+node_modules/
+dist/
+build/
+*.log
+*.db
+*.sqlite
+.env
+.env.*
+coverage/
+*.key
+*.pem
+*.der
+.DS_Store
+Thumbs.db

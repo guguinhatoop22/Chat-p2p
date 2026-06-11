@@ -1,0 +1,9 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "npx electron": true,
+        "/^cd \"C:\\\\Users\\\\user\\\\Desktop\\\\Chat P2P\\\\p2p-secure\" ; node -e \"import\\('@libp2p/crypto/keys'\\)\\.then\\(m => console\\.log\\(Object\\.keys\\(m\\)\\)\\)\\.catch\\(e => console\\.log\\('ERROR:', e\\.message\\)\\)\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

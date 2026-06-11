@@ -1,0 +1,100 @@
+{
+  "name": "p2p-secure-chat",
+  "version": "0.1.0",
+  "author": "P2P Secure Chat",
+  "description": "P2P Secure Chat - audit-grade, sem servidor central",
+  "main": "src/ui/main.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "electron .",
+    "start:daemon": "node src/network/node.js",
+    "dev": "electron .",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:dir": "electron-builder --dir",
+    "postinstall": "electron-builder install-app-deps",
+    "test": "jest",
+    "test:security": "jest tests/security",
+    "lint": "eslint src --ext .js,.jsx",
+    "lint:fix": "eslint src --ext .js,.jsx --fix"
+  },
+  "dependencies": {
+    "@libp2p/bootstrap": "^12.0.0",
+    "@libp2p/identify": "^4.0.0",
+    "@libp2p/kad-dht": "^16.0.0",
+    "@libp2p/mplex": "^12.0.0",
+    "@libp2p/noise": "^1.0.0",
+    "@libp2p/ping": "^3.0.13",
+    "@libp2p/tcp": "^11.0.0",
+    "@libp2p/websockets": "^10.0.0",
+    "argon2": "^0.44.0",
+    "better-sqlite3": "^12.0.0",
+    "electron-store": "^10.0.0",
+    "libp2p": "^3.0.0",
+    "libsodium-wrappers": "^0.7.15",
+    "qrcode": "^1.5.4",
+    "uuid": "^11.0.0",
+    "winston": "^3.19.0",
+    "ws": "^8.20.0"
+  },
+  "optionalDependencies": {
+    "@libp2p/webrtc": "*",
+    "opus-encoder": "*"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "concurrently": "^9.0.0",
+    "electron": "^41.0.0",
+    "electron-builder": "^26.0.0",
+    "eslint": "^9.0.0",
+    "jest": "^30.0.0"
+  },
+  "build": {
+    "appId": "com.p2psecure.chat",
+    "productName": "P2P Secure Chat",
+    "asar": true,
+    "npmRebuild": false,
+    "nodeGypRebuild": false,
+    "asarUnpack": [
+      "**/node_modules/argon2/**",
+      "**/node_modules/libsodium*/**"
+    ],
+    "icon": "assets/icon",
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "icon": "assets/icon.ico",
+      "signAndEditExecutable": false,
+      "target": [
+        "nsis"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "perMachine": false
+    },
+    "files": [
+      "package.json",
+      "src/**/*",
+      "protocols/**/*",
+      "assets/**/*",
+      "!src/ui/node_modules"
+    ],
+    "extraMetadata": {
+      "main": "src/ui/main.js"
+    }
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ]
+  }
+}

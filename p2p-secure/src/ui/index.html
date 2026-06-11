@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:;" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>P2P Secure Chat</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="sidebar">
+      <div id="my-info">
+        <div class="label">Meu PeerID</div>
+        <div id="peer-id-display">Carregando...</div>
+        <div id="my-addrs"></div>
+      </div>
+
+      <div id="connect-form">
+        <label for="peer-addr">Conectar a peer (multiaddr):</label>
+        <textarea id="peer-addr"
+                  placeholder="/ip4/192.168.x.x/tcp/PORT/p2p/12D3KooW..."
+                  rows="3"></textarea>
+        <button id="btn-connect">Conectar</button>
+      </div>
+
+      <div id="peers-section">
+        <h3>Peers Conectados</h3>
+        <div id="peers-list">
+          <div class="empty-peers">Nenhum peer conectado</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="chat-area">
+      <div id="chat-header">
+        <div id="chat-title-group">
+          <span id="chat-header-label">Selecione um peer para conversar</span>
+          <div id="chat-peer-block">
+            <div id="active-peer-display"></div>
+            <input id="peer-nick-edit" class="hidden" type="text" maxlength="40" autocomplete="off" />
+            <div id="active-peer-id" class="hidden"></div>
+          </div>
+        </div>
+
+        <div id="chat-header-actions">
+          <button id="btn-edit-nick" class="hidden" title="Editar nome deste peer">Editar nome</button>
+          <button id="btn-save-nick" class="hidden">Salvar</button>
+          <button id="btn-cancel-nick" class="hidden">Cancelar</button>
+          <button id="btn-verify" class="hidden" title="Verificar identidade deste peer">Verificar</button>
+        </div>
+      </div>
+
+      <div id="messages">
+        <div id="empty-state">
+          <p>Nenhuma conversa selecionada</p>
+          <small>Conecte a um peer usando o painel esquerdo</small>
+        </div>
+      </div>
+
+      <div id="input-area">
+        <input type="text" id="message-input"
+               placeholder="Digite uma mensagem..."
+               disabled autocomplete="off" />
+        <button id="btn-send" disabled>Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="status-bar">
+    <span id="status-text">Inicializando...</span>
+    <span id="peer-count">0 peers</span>
+  </div>
+
+  <div id="toast" class="hidden" aria-live="polite"></div>
+
+  <div id="fp-modal" role="dialog" aria-modal="true" aria-labelledby="fp-modal-title" class="hidden">
+    <div id="fp-modal-inner">
+      <h2 id="fp-modal-title">Verificar Identidade</h2>
+      <p id="fp-modal-peer"></p>
+      <img id="fp-qr" alt="QR Code do fingerprint" width="200" height="200" class="hidden" />
+      <div id="fp-text" aria-label="Fingerprint de seguranca"></div>
+      <p class="fp-instructions">
+        Compare este codigo com seu contato <strong>pessoalmente</strong> ou por outro canal confiavel.<br>
+        Se os codigos coincidirem, a conexao e autentica - sem MITM.
+      </p>
+      <button id="fp-close">Fechar</button>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>
